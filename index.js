@@ -20,12 +20,10 @@ const userRoutes = require('./routes/user');
 //set the app to use ejs for rendering
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
 
 //this adds all the userRoutes to the app under the path /user
 app.use('/user', userRoutes);
+require("./routes/main")(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
