@@ -5,16 +5,32 @@
 const express = require("express");
 const router = express.Router();
 
+/**
+ * @def Main route. Retrieves blog and article data
+ */
 router.get("/", (req, res, next) => {
 
-  global.db.all("SELECT * FROM blog LIMIT 1", function (err, rows) {
+  var data ={}
+
+  global.db.all("SELECT * FROM blog LIMIT 1", function (err, blogs) {
     if (err) {
       next(err); //send the error on to the error handler
     } else {
-      res.render("author.ejs", {
-        title: "Author's page",
-        blog:rows[0]
-      });      
+
+      data.blog = blogs[0]
+
+      global.db.all("SELECT * FROM articles", function (err, articles) {
+        if (err) {
+          next(err); //send the error on to the error handler
+        } else {
+          data.articles = articles
+          //res.send(data)
+          res.render("author.ejs", {
+            title: "Author's page",
+            data
+          });   
+        }
+      });   
     }
   });
 });

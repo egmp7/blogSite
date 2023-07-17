@@ -11,49 +11,49 @@ My code starts here
     <title><%= title %></title>
 </head>
 <body>
-    <h1><%= blog.title %></h1>
-    <p><%= blog.subtitle %></p>
-    <p><%= blog.author %></p>
+    <h1><%= data.blog.title %></h1>
+    <p><%= data.blog.subtitle %></p>
+    <p><%= data.blog.author %></p>
     <h2><%= title %></h2>
     <a href="/author/settings">Settings page</a>
     <br>
     <a href="/author/edit">Create new draft</a>
 
+    <!-- Published Articles -->
     <h2>Published</h2>
     <ul>
-        <li>
-            <h3>Title 1</h3>
-            <h4>Subtitle 1</h4>
-            <p>Author's name 1</p>
-        </li>
-    
-
-    
-        <li>
-            <h3>Title 2</h3>
-            <h4>Subtitle 2</h4>
-            <p>Author's name 2</p>
-        </li>
+        <% data.articles.forEach(function(article) { %>
+            <% if (article.published) { %>
+                <li>
+                    <p><%= article.title %></p>
+                    <p><%= article.subtitle %></p>
+                    <p><%= article.article_text %></p>
+                    <p><%= article.author %></p>
+                    <p><%= article.likes %></p>
+                    <p><%= article.creation_date %></p>
+                    <p><%= article.last_modified_date %></p>
+                    <p><%= article.published_date %></p>
+                </li>
+            <% } %>
+         <% }); %> 
     </ul>
     
+    <!-- Draft Articles -->
     <h2>Drafts</h2>
-
     <ul>
-        <li>
-            <h3>Title 1</h3>
-            <h4>Subtitle 1</h4>
-            <p>Author's name 1</p>
-        </li>
-    
-
-    
-        <li>
-            <h3>Title 2</h3>
-            <h4>Subtitle 2</h4>
-            <p>Author's name 2</p>
-        </li>
+        <% data.articles.forEach(function(article) { %>
+            <% if (! article.published) { %>
+                <li>
+                    <p><%= article.title %></p>
+                    <p><%= article.subtitle %></p>
+                    <p><%= article.article_text %></p>
+                    <p><%= article.author %></p>
+                    <p><%= article.creation_date %></p>
+                    <p><%= article.last_modified_date %></p>
+                </li>
+            <% } %>
+         <% }); %> 
     </ul>
-
 </body>
 </html>
 
