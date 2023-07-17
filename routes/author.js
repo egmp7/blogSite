@@ -7,19 +7,16 @@ const router = express.Router();
 
 router.get("/", (req, res, next) => {
 
-  res.render("author.ejs", {
-    title: "Author's page"
+  global.db.all("SELECT * FROM blog LIMIT 1", function (err, rows) {
+    if (err) {
+      next(err); //send the error on to the error handler
+    } else {
+      res.render("author.ejs", {
+        title: "Author's page",
+        blog:rows[0]
+      });      
+    }
   });
-    //Use this pattern to retrieve data
-    //NB. it's better NOT to use arrow functions for callbacks with this library
-    // global.db.all("SELECT * FROM testUsers", function (err, rows) {
-    //   if (err) {
-    //     next(err); //send the error on to the error handler
-    //   } else {
-    //     res.json(rows);
-    //   }
-    // });
-    
 });
 
 router.get("/settings", (req, res, next) => {

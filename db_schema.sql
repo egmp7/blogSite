@@ -23,5 +23,23 @@ CREATE TABLE IF NOT EXISTS testUserRecords (
 INSERT INTO testUsers ("test_name") VALUES ("Simon Star");
 INSERT INTO testUserRecords ("test_record_value", "test_user_id") VALUES( "Lorem ipsum dolor sit amet", 1); --try changing the test_user_id to a different number and you will get an error
 
+--**********************
+-- My code starts here
+--**********************
+
+CREATE TABLE IF NOT EXISTS blog (
+    blog_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    subtitle TEXT NOT NULL,
+    author TEXT NOT NULL
+);
+
+INSERT INTO blog (title,subtitle,author) VALUES ("This is a title","This is a subtitle", "This is the author");
+
+--**********************
+-- My code ends here
+--**********************
+
+
 COMMIT;
 
