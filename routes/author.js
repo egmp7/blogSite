@@ -62,12 +62,48 @@ router.post("/edit-settings", (req, res, next) => {
   );
 });
 
-router.get("/edit", (req, res, next) => {
+/**
+ * @def Creates a new draft article and 
+ * redirects to the corresponding edit page.
+ */
+router.get("/create-new-draft", createDraft, (req, res, next) => {
+  global.db.all("SELECT article_id FROM articles ORDER BY article_id DESC LIMIT 1", function (err, data) {
+    if (err) {
+      next(err); 
+    } 
+    else {
+      const id = data[0].article_id
+      res.redirect(`/author/edit/${id}`);
+    }
+  });
+});
+
+/**
+ * @def Dynamic Edit article page
+ */
+router.get("/edit/:id", (req, res, next) => {
 
   res.render("edit.ejs", {
     title: "Edit page"
   });  
 });
+
+/**
+ * @def Middleware function to create a new draft article
+ */
+function createDraft(req,res,next) {
+  global.db.run(
+    "INSERT INTO articles (title,subtitle,article_text,author,likes,published,creation_date,last_modified_date) VALUES( ?, ?, ?, ?, ?, ?, ?, ? );",
+    ["title", "subtitle","text","author",0,0,Date.now(),Date.now()],
+    function (err) {
+      if (err) {
+        next(err); 
+      } else {
+        next()
+      }
+    }
+  );
+}
 
 /**
  * @def Middleware function to retrive data from blog table
