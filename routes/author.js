@@ -8,49 +8,37 @@ const router = express.Router();
 /**
  * @def Main page. Retrieves blog and article data
  */
-router.get("/", (req, res, next) => {
+router.get("/", getBlogData, (req, res, next) => {
 
-  var data ={}
+  global.db.all("SELECT * FROM articles", function (err, articles) {
 
-  global.db.all("SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1", function (err, blogs) {
     if (err) {
-      next(err); //send the error on to the error handler
+      next(err); 
     } else {
 
-      data.blog = blogs[0]
+      // get data
+      var data ={}
+      data.articles = articles
+      data.blog = req.blogData
 
-      global.db.all("SELECT * FROM articles", function (err, articles) {
-        if (err) {
-          next(err); //send the error on to the error handler
-        } else {
-          data.articles = articles
-          //res.send(data)
-          res.render("author.ejs", {
-            title: "Author's page",
-            data
-          });   
-        }
+      // render
+      res.render("author.ejs", {
+        title: "Author's page",
+        data
       });   
     }
-  });
+  });  
 });
 
 /**
  * @def Settings page. Retrieves blog data
  */
-router.get("/settings", (req, res, next) => {
+router.get("/settings", getBlogData, (req, res, next) => {
 
-  global.db.all("SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1", function (err, blogs) {
-    if (err) {
-      next(err); //send the error on to the error handler
-    } else {
-
-      res.render("settings.ejs", {
-        title: "Settings's page",
-        data:blogs[0]
-      });
-    }
-  });  
+  res.render("settings.ejs", {
+    title: "Settings's page",
+    data:req.blogData
+  });
 });
 
 /**
@@ -80,6 +68,22 @@ router.get("/edit", (req, res, next) => {
     title: "Edit page"
   });  
 });
+
+/**
+ * @def Middleware function to retrive data from blog table
+ */
+function getBlogData(req,res,next) {
+
+  global.db.all("SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1", function (err, blogs) {
+    if (err) {
+      next(err); 
+    } 
+    else {
+      req.blogData = blogs[0]
+      next()
+    }
+  });
+}
 
 module.exports = router;
 
