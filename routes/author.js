@@ -3,6 +3,7 @@
  *********************/
 
 const express = require("express");
+const { redirect } = require("express/lib/response");
 const router = express.Router();
 
 /**
@@ -123,6 +124,35 @@ router.post("/save-article/:id",(req, res, next)=>{
     }
   });
 })
+
+/**
+ * @def Publishes an article
+ */
+router.get("/publish-article/:id",(req, res, next)=>{
+  global.db.run(`UPDATE articles SET published = 1, 
+                                    published_date = ${Date.now()}
+                                    WHERE article_id = ${req.params.id}`,
+    function (err){
+    if(err){
+      next(err);
+    } else{
+      res.redirect("/author")
+    }
+  });
+});
+
+/**
+ * @def Deletes an article from the database
+ */
+router.get("/delete-article/:id",(req, res, next)=>{
+  global.db.run(`DELETE FROM articles WHERE article_id = ${req.params.id}`,function (err){
+    if(err){
+      next(err);
+    } else{
+      res.redirect("/author")
+    }
+  });
+});
 
 /////////////////////////////////////////////////////////////
 //  MIDDLEWARE FUNCTIONS

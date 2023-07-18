@@ -51,7 +51,8 @@ My code starts here
                     <p><%= article.author %></p>
                     <p><%= article.creation_date %></p>
                     <p><%= article.last_modified_date %></p>
-                    <a href="/author/delete-article/<%= article.article_id %>">Delete Article</a>
+                    <a href="/author/delete-article/<%= article.article_id %>">Delete Article</a> <br>
+                    <a href="/author/publish-article/<%= article.article_id %>">Publish Article</a>
                 </li>
             <% } %>
          <% }); %> 
