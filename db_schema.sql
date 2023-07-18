@@ -28,17 +28,17 @@ INSERT INTO testUserRecords ("test_record_value", "test_user_id") VALUES( "Lorem
 --**********************
 
 CREATE TABLE IF NOT EXISTS blog (
-    blog_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     subtitle TEXT NOT NULL,
     author TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS articles (
-    article_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     subtitle TEXT NOT NULL,
-    article_text TEXT NOT NULL,
+    textbox TEXT NOT NULL,
     author TEXT NOT NULL,
     likes INT NOT NULL,
     published BOOLEAN NOT NULL,
@@ -49,10 +49,10 @@ CREATE TABLE IF NOT EXISTS articles (
 
 -- testing values
 INSERT INTO blog (title,subtitle,author) VALUES ("This is a title","This is a subtitle", "This is the author");
-INSERT INTO articles (title,subtitle,article_text,author,likes,published,creation_date,last_modified_date,published_date)
+INSERT INTO articles (title,subtitle,textbox,author,likes,published,creation_date,last_modified_date,published_date)
 VALUES("Article title 1","Article subtitle 1","Article text 1", "Article author 1", 0,1, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ("Article title 2","Article subtitle 2","Article text 2", "Article author 2", 0,1, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO articles (title,subtitle,article_text,author,likes,published,creation_date,last_modified_date)
+INSERT INTO articles (title,subtitle,textbox,author,likes,published,creation_date,last_modified_date)
 VALUES("Article title 3","Article subtitle 3","Article text 3", "Article author 3", 0,0, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 ("Article title 4","Article subtitle 4","Article text 4", "Article author 4", 0,0, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 

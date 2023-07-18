@@ -8,18 +8,20 @@ My code starts here
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title><%= pageTitle %></title>
 </head>
 <body>
-    <h1><%= title %></h1>
+    <h1><%= pageTitle %></h1>
+
+    <a href="/author">Go back</a>
 
     <form action="/author/edit-settings" method="POST">
         <label for="blogTitle">Blog title:</label><br>
-        <input type="text" name="blogTitle" value="<%= data.title %>"><br>
+        <input type="text" name="blogTitle" value="<%= blog.title %>"><br>
         <label for="blogSubtitle">Blog subtitle:</label><br>
-        <input type="text" name="blogSubtitle" value="<%= data.subtitle %>"><br>
+        <input type="text" name="blogSubtitle" value="<%= blog.subtitle %>"><br>
         <label for="blogAuthor">Blog author:</label><br>
-        <input type="text" name="blogAuthor" value="<%= data.author %>"><br>
+        <input type="text" name="blogAuthor" value="<%= blog.author %>"><br>
         <input type="submit" value="Update">
     </form>
 

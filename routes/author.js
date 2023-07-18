@@ -16,16 +16,10 @@ router.get("/", getBlogData, (req, res, next) => {
     if (err) {
       next(err); 
     } else {
-
-      // get data
-      var data ={}
-      data.articles = articles
-      data.blog = req.blogData
-
-      // render
       res.render("author.ejs", {
-        title: "Author's page",
-        data
+        pageTitle: "Author's page",
+        blog: req.blogData,
+        articles
       });   
     }
   });  
@@ -37,8 +31,8 @@ router.get("/", getBlogData, (req, res, next) => {
 router.get("/settings", getBlogData, (req, res, next) => {
 
   res.render("settings.ejs", {
-    title: "Settings's page",
-    data:req.blogData
+    pageTitle: "Settings's page",
+    blog: req.blogData
   });
 });
 
@@ -67,13 +61,12 @@ router.post("/edit-settings", (req, res, next) => {
  * redirects to the corresponding edit page.
  */
 router.get("/create-new-draft", createDraft, (req, res, next) => {
-  global.db.all("SELECT article_id FROM articles ORDER BY article_id DESC LIMIT 1", function (err, data) {
+  global.db.get("SELECT id FROM articles ORDER BY id DESC LIMIT 1", function (err, article) {
     if (err) {
       next(err); 
     } 
     else {
-      const id = data[0].article_id
-      res.redirect(`/author/edit/${id}`);
+      res.redirect(`/author/edit/${article.id}`);
     }
   });
 });
@@ -86,14 +79,11 @@ router.get("/create-new-draft", createDraft, (req, res, next) => {
  */
 router.get("/edit/:id", (req, res, next) => {
 
-  global.db.all(`SELECT article_id, title,subtitle,author,article_text FROM articles WHERE article_id = ${req.params.id}`,
-    function (err, data) {
+  global.db.get(`SELECT * FROM articles WHERE id = ${req.params.id}`, function (err, article) {
     if (err) {
       next(err); 
     } 
     else {
-
-      const article = data[0]
       res.render("edit.ejs", {
         title: "Edit page",
         article
@@ -109,12 +99,12 @@ router.post("/save-article/:id",(req, res, next)=>{
   
   const data = req.body;
 
-  global.db.all(`UPDATE articles SET title = "${data.articleTitle}", 
+  global.db.run(`UPDATE articles SET title = "${data.articleTitle}", 
                                     subtitle = "${data.articleSubtitle}", 
                                     author = "${data.articleAuthor}", 
-                                    article_text = "${data.articleText}",
+                                    textbox = "${data.articleText}",
                                     last_modified_date = "${Date.now()}"
-                                    WHERE article_id = ${req.params.id}`, 
+                                    WHERE id = ${req.params.id}`, 
   function (err, data) {
     if (err) {
       next(err); 
@@ -123,7 +113,7 @@ router.post("/save-article/:id",(req, res, next)=>{
       res.redirect("/author")
     }
   });
-})
+});
 
 /**
  * @def Publishes an article
@@ -131,8 +121,8 @@ router.post("/save-article/:id",(req, res, next)=>{
 router.get("/publish-article/:id",(req, res, next)=>{
   global.db.run(`UPDATE articles SET published = 1, 
                                     published_date = ${Date.now()}
-                                    WHERE article_id = ${req.params.id}`,
-    function (err){
+                                    WHERE id = ${req.params.id}`,
+  function (err){
     if(err){
       next(err);
     } else{
@@ -145,7 +135,8 @@ router.get("/publish-article/:id",(req, res, next)=>{
  * @def Deletes an article from the database
  */
 router.get("/delete-article/:id",(req, res, next)=>{
-  global.db.run(`DELETE FROM articles WHERE article_id = ${req.params.id}`,function (err){
+  global.db.run(`DELETE FROM articles WHERE id = ${req.params.id}`,
+  function (err){
     if(err){
       next(err);
     } else{
@@ -164,21 +155,20 @@ function createDraft(req,res,next) {
   global.db.run(
     `INSERT INTO articles (title,
                           subtitle,
-                          article_text,
+                          textbox,
                           author,likes,
                           published,
                           creation_date,
                           last_modified_date) 
     VALUES( ?, ?, ?, ?, ?, ?, ?, ? );`,
     ["title", "subtitle","text","author",0,0,Date.now(),Date.now()],
-    function (err) {
-      if (err) {
-        next(err); 
-      } else {
-        next()
-      }
+  function (err) {
+    if (err) {
+      next(err); 
+    } else {
+      next()
     }
-  );
+  });
 }
 
 /**
@@ -186,12 +176,13 @@ function createDraft(req,res,next) {
  */
 function getBlogData(req,res,next) {
 
-  global.db.all("SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1", function (err, blogs) {
+  global.db.get("SELECT * FROM blog ORDER BY id DESC LIMIT 1", 
+  function (err, blog) {
     if (err) {
       next(err); 
     } 
     else {
-      req.blogData = blogs[0]
+      req.blogData = blog
       next()
     }
   });
