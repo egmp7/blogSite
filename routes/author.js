@@ -6,13 +6,13 @@ const express = require("express");
 const router = express.Router();
 
 /**
- * @def Main route. Retrieves blog and article data
+ * @def Main page. Retrieves blog and article data
  */
 router.get("/", (req, res, next) => {
 
   var data ={}
 
-  global.db.all("SELECT * FROM blog LIMIT 1", function (err, blogs) {
+  global.db.all("SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1", function (err, blogs) {
     if (err) {
       next(err); //send the error on to the error handler
     } else {
@@ -35,11 +35,43 @@ router.get("/", (req, res, next) => {
   });
 });
 
+/**
+ * @def Settings page. Retrieves blog data
+ */
 router.get("/settings", (req, res, next) => {
 
-  res.render("settings.ejs", {
-    title: "Settings's page"
+  global.db.all("SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1", function (err, blogs) {
+    if (err) {
+      next(err); //send the error on to the error handler
+    } else {
+
+      res.render("settings.ejs", {
+        title: "Settings's page",
+        data:blogs[0]
+      });
+    }
   });  
+});
+
+/**
+ * @def Stores settings in blog tables.
+ */
+router.post("/edit-settings", (req, res, next) => {
+
+  const data = req.body;
+  
+  global.db.run(
+    "INSERT INTO blog (title,subtitle,author) VALUES( ?, ?, ? );",
+    [data.blogTitle, data.blogSubtitle,data.blogAuthor],
+    function (err) {
+      if (err) {
+        next(err); 
+      } else {
+        res.redirect("/author");
+        next();
+      }
+    }
+  );
 });
 
 router.get("/edit", (req, res, next) => {

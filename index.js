@@ -27,6 +27,10 @@ app.use('/user', userRoutes);
  My code starts here 
  *********************/
 
+// body parser
+const bodyParser= require ("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Main routes for blog
 const authorRoutes = require('./routes/author');
 app.use('/author', authorRoutes);

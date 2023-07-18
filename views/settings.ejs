@@ -13,6 +13,16 @@ My code starts here
 <body>
     <h1><%= title %></h1>
 
+    <form action="/author/edit-settings" method="POST">
+        <label for="blogTitle">Blog title:</label><br>
+        <input type="text" name="blogTitle" value="<%= data.title %>"><br>
+        <label for="blogSubtitle">Blog subtitle:</label><br>
+        <input type="text" name="blogSubtitle" value="<%= data.subtitle %>"><br>
+        <label for="blogAuthor">Blog author:</label><br>
+        <input type="text" name="blogAuthor" value="<%= data.author %>"><br>
+        <input type="submit" value="Update">
+    </form>
+
 </body>
 </html>
 
