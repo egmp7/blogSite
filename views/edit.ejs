@@ -13,6 +13,18 @@ My code starts here
 <body>
     <h1><%= title %></h1>
 
+    <form action="/author/save-article/<%= article.article_id %>" method="POST">
+        <label for="articleTitle">Article title:</label><br>
+        <input type="text" name="articleTitle" value="<%= article.title %>"><br>
+        <label for="articleSubtitle">Article subtitle:</label><br>
+        <input type="text" name="articleSubtitle" value="<%= article.subtitle %>"><br>
+        <label for="articleAuthor">Article author:</label><br>
+        <input type="text" name="articleAuthor" value="<%= article.author %>"><br>
+        <label for="articleText">Article Text:</label><br>
+        <textarea  name="articleText"><%= article.article_text %></textarea><br>
+        <input type="submit" value="Save">
+    </form>
+
 </body>
 </html>
 
