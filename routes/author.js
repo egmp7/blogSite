@@ -77,6 +77,30 @@ router.get("/create-new-draft", createDraft, (req, res, next) => {
   });
 });
 
+/////////////////////////////////////////////////////////////
+//  DYNAMIC URLS
+
+/**
+ * @def Dynamic Edit article page
+ */
+router.get("/edit/:id", (req, res, next) => {
+
+  global.db.all(`SELECT article_id, title,subtitle,author,article_text FROM articles WHERE article_id = ${req.params.id}`,
+    function (err, data) {
+    if (err) {
+      next(err); 
+    } 
+    else {
+
+      const article = data[0]
+      res.render("edit.ejs", {
+        title: "Edit page",
+        article
+      });  
+    }
+  });
+});
+
 /**
  * @def Saves article changes from the edit page
  */
@@ -100,26 +124,8 @@ router.post("/save-article/:id",(req, res, next)=>{
   });
 })
 
-/**
- * @def Dynamic Edit article page
- */
-router.get("/edit/:id", (req, res, next) => {
-
-  global.db.all(`SELECT article_id, title,subtitle,author,article_text FROM articles WHERE article_id = ${req.params.id}`,
-    function (err, data) {
-    if (err) {
-      next(err); 
-    } 
-    else {
-
-      const article = data[0]
-      res.render("edit.ejs", {
-        title: "Edit page",
-        article
-      });  
-    }
-  });
-});
+/////////////////////////////////////////////////////////////
+//  MIDDLEWARE FUNCTIONS
 
 /**
  * @def Middleware function to create a new draft article

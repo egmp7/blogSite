@@ -33,6 +33,7 @@ My code starts here
                     <p><%= article.creation_date %></p>
                     <p><%= article.last_modified_date %></p>
                     <p><%= article.published_date %></p>
+                    <a href="/author/delete-article/<%= article.article_id %>">Delete Article</a>
                 </li>
             <% } %>
          <% }); %> 
@@ -50,6 +51,7 @@ My code starts here
                     <p><%= article.author %></p>
                     <p><%= article.creation_date %></p>
                     <p><%= article.last_modified_date %></p>
+                    <a href="/author/delete-article/<%= article.article_id %>">Delete Article</a>
                 </li>
             <% } %>
          <% }); %> 
