@@ -31,9 +31,13 @@ app.use('/user', userRoutes);
 const bodyParser= require ("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Main routes for blog
+// Author route
 const authorRoutes = require('./routes/author');
 app.use('/author', authorRoutes);
+
+// Reader route
+const readerRoutes = require('./routes/reader');
+app.use('/reader', readerRoutes);
 
 /*********************  
  My code ends here 

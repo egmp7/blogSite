@@ -7,7 +7,7 @@ const { redirect } = require("express/lib/response");
 const router = express.Router();
 
 /**
- * @def Main page. Retrieves blog and article data
+ * @def Main author page. Retrieves blog and article data
  */
 router.get("/", getBlogData, (req, res, next) => {
 
@@ -85,7 +85,7 @@ router.get("/edit/:id", (req, res, next) => {
     } 
     else {
       res.render("edit.ejs", {
-        title: "Edit page",
+        pageTitle: "Edit page",
         article
       });  
     }

@@ -1,0 +1,40 @@
+<!-- ********************
+My code starts here
+***********************-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+</head>
+
+<body>
+    <h1><%= blog.title %></h1>
+    <p><%= blog.subtitle %></p>
+    <p><%= blog.author %></p>
+    <h2><%= pageTitle %></h2>
+
+    <!-- Published Articles -->
+    <h2>Published</h2>
+    <ul>
+        <% articles.forEach(function(article) { %>
+            <li>
+                <p><%= article.title %></p>
+                <p><%= article.subtitle %></p>
+                <p><%= article.textbox %></p>
+                <p><%= article.author %></p>
+                <p><%= article.likes %></p>
+                <p><%= article.published_date %></p>
+                <a href="/reader/<%= article.id %>"> Read More</a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
+
+<!-- ********************
+My code ends here
+***********************-->
