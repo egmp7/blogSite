@@ -21,6 +21,27 @@ My code starts here
     <p><%= article.likes %></p>
     <p><%= article.published_date %></p>
 
+    <form action="/reader/save-comment/<%= article.id %>" method="POST">
+        <label for="firstName">First name: </label><br>
+        <input type="text" name="firstName" ><br>
+        <label for="lastName">Last name:</label><br>
+        <input type="text" name="lastName"c><br>
+        <label for="commentText">Comment:</label><br>
+        <textarea  name="commentText"></textarea><br>
+        <input type="submit" value="Comment">
+    </form>
+
+    <h2>Comments</h2>
+    <ul>
+        <% comments.forEach(function(comment) { %>
+            <li>
+                <p><%= comment.first_name %></p>
+                <p><%= comment.last_name %></p>
+                <p><%= comment.comment %></p>
+                <p><%= comment.creation_date %></p>
+            </li>
+        <% }) %>
+    </ul>
 </body>
 </html>
 

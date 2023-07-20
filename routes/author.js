@@ -6,6 +6,9 @@ const express = require("express");
 const { redirect } = require("express/lib/response");
 const router = express.Router();
 
+/////////////////////////////////////////////////////////////
+//  STATIC URLS
+
 /**
  * @def Main author page. Retrieves blog and article data
  */

@@ -47,6 +47,15 @@ CREATE TABLE IF NOT EXISTS articles (
     published_date TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS comments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    last_name TEXT,
+    comment TEXT NOT NULL,
+    creation_date TIMESTAMP NOT NULL,
+    article_id INTEGER NOT NULL
+);
+
 -- testing values
 INSERT INTO blog (title,subtitle,author) VALUES ("This is a title","This is a subtitle", "This is the author");
 INSERT INTO articles (title,subtitle,textbox,author,likes,published,creation_date,last_modified_date,published_date)

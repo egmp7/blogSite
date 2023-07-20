@@ -2,6 +2,9 @@
  My code starts here 
  *********************/
 
+/////////////////////////////////////////////////////////////
+//  STATIC URLS
+
 const express = require("express");
 const { redirect } = require("express/lib/response");
 const router = express.Router();
@@ -27,10 +30,13 @@ router.get("/", getBlogData,(req, res, next) => {
   });
 });
 
+/////////////////////////////////////////////////////////////
+//  DYNAMIC URLS
+
 /**
  * @def Dynamic read article page
  */
-router.get("/:id", (req, res, next) => {
+router.get("/:id", getComments, (req, res, next) => {
 
   global.db.get(`SELECT * FROM articles WHERE id = ${req.params.id}`, function (err, article) {
     if (err) {
@@ -43,7 +49,8 @@ router.get("/:id", (req, res, next) => {
       if( isPublished ){
         res.render("article.ejs", {
           pageTitle: "Read article page",
-          article
+          article,
+          comments:req.commentsData
         });
       }else{
 
@@ -54,7 +61,35 @@ router.get("/:id", (req, res, next) => {
 });
 
 /**
- * @def Middleware function to retrive data from blog table
+ * @def Stores comments in database
+ */
+router.post("/save-comment/:id",(req, res, next)=>{
+  
+  const data = req.body;
+
+  global.db.run(`INSERT INTO comments (first_name,
+                                      last_name,
+                                      comment,
+                                      creation_date,
+                                      article_id) 
+                  VALUES( ?, ?, ?, ?, ? )`,
+  [data.firstName, data.lastName,data.commentText,Date.now(),req.params.id], 
+  function (err, data) {
+    if (err) {
+      next(err); 
+    } 
+    else {
+      res.redirect('back');
+    }
+  });
+});
+
+/////////////////////////////////////////////////////////////
+//  MIDDLEWARE FUNCTIONS
+
+/**
+ * @def Middleware function to retrive data from blog table.
+ * Data is stored as req.blogData
  */
 function getBlogData(req,res,next) {
 
@@ -65,6 +100,24 @@ function getBlogData(req,res,next) {
     } 
     else {
       req.blogData = blog
+      next()
+    }
+  });
+}
+
+/**
+ * @def Middleware function to retrive data from comments.
+ * Data is stored as req.commentsData
+ */
+function getComments(req,res,next) {
+
+  global.db.all(`SELECT * FROM comments WHERE article_id = ${req.params.id}`, 
+  function (err, comments) {
+    if (err) {
+      next(err); 
+    } 
+    else {
+      req.commentsData = comments
       next()
     }
   });
