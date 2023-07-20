@@ -84,6 +84,23 @@ router.post("/save-comment/:id",(req, res, next)=>{
   });
 });
 
+/**
+ * @def Stores likes in articles
+ */
+router.get("/like-article/:id",(req, res, next)=>{
+  
+  const data = req.body;
+
+  global.db.run(`UPDATE articles SET likes = likes +1 WHERE id = ${req.params.id}`, function (err, data) {
+    if (err) {
+      next(err); 
+    } 
+    else {
+      res.redirect('back');
+    }
+  });
+});
+
 /////////////////////////////////////////////////////////////
 //  MIDDLEWARE FUNCTIONS
 

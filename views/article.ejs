@@ -20,6 +20,8 @@ My code starts here
     <p><%= article.author %></p>
     <p><%= article.likes %></p>
     <p><%= article.published_date %></p>
+    <a href="/reader">Go back</a>
+    <a href="/reader/like-article/<%= article.id %>">Like</a>
 
     <form action="/reader/save-comment/<%= article.id %>" method="POST">
         <label for="firstName">First name: </label><br>
