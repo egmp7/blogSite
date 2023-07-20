@@ -25,7 +25,13 @@ app.use('/user', userRoutes);
 
 /*********************  
  My code starts here 
- *********************/
+*********************/
+
+// Static files
+app.use(express.static('public'))
+
+// bootstrap
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 // body parser
 const bodyParser= require ("body-parser");
@@ -41,7 +47,7 @@ app.use('/reader', readerRoutes);
 
 /*********************  
  My code ends here 
- *********************/
+*********************/
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
