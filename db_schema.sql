@@ -59,11 +59,11 @@ CREATE TABLE IF NOT EXISTS comments (
 -- testing values
 INSERT INTO blog (title,subtitle,author) VALUES ("This is a title","This is a subtitle", "This is the author");
 INSERT INTO articles (title,subtitle,textbox,author,likes,published,creation_date,last_modified_date,published_date)
-VALUES("Article title 1","Article subtitle 1","Article text 1", "Article author 1", 0,1, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-("Article title 2","Article subtitle 2","Article text 2", "Article author 2", 0,1, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+VALUES("Article title 1","Article subtitle 1","Article text 1", "Article author 1", 0,1, 1689886281057,1689886281057,1689886281057),
+("Article title 2","Article subtitle 2","Article text 2", "Article author 2", 0,1, 1689886281057,1689886281057,1689886281057);
 INSERT INTO articles (title,subtitle,textbox,author,likes,published,creation_date,last_modified_date)
-VALUES("Article title 3","Article subtitle 3","Article text 3", "Article author 3", 0,0, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
-("Article title 4","Article subtitle 4","Article text 4", "Article author 4", 0,0, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+VALUES("Article title 3","Article subtitle 3","Article text 3", "Article author 3", 0,0, 1689886281057,1689886281057),
+("Article title 4","Article subtitle 4","Article text 4", "Article author 4", 0,0, 1689886281057,1689886281057);
 
 
 --**********************

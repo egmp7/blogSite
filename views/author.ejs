@@ -34,7 +34,8 @@ My code starts here
                     <p><%= article.last_modified_date %></p>
                     <p><%= article.published_date %></p>
                     <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
-                    <a href="/author/edit/<%= article.id %>">Edit Article</a>
+                    <a href="/author/edit/<%= article.id %>">Edit Article</a><br>
+                    <a href="/reader/<%= article.id %>">Sharing link</a>
                 </li>
             <% } %>
          <% }); %> 
@@ -57,7 +58,7 @@ My code starts here
                     <a href="/author/edit/<%= article.id %>">Edit Article</a>
                 </li>
             <% } %>
-         <% }); %> 
+        <% }); %>
     </ul>
 </body>
 </html>

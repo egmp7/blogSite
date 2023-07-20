@@ -13,7 +13,7 @@ const router = express.Router();
  * @def Main reader page. Retrieves blog and article data
  */
 router.get("/", getBlogData,(req, res, next) => {
-  global.db.all("SELECT * FROM articles WHERE published = 1 ", 
+  global.db.all("SELECT * FROM articles WHERE published = 1 ORDER BY published_date DESC", 
   function (err, articles) {
 
     if (err) {
@@ -128,7 +128,7 @@ function getBlogData(req,res,next) {
  */
 function getComments(req,res,next) {
 
-  global.db.all(`SELECT * FROM comments WHERE article_id = ${req.params.id}`, 
+  global.db.all(`SELECT * FROM comments WHERE article_id = ${req.params.id} ORDER BY creation_date DESC`, 
   function (err, comments) {
     if (err) {
       next(err); 

@@ -24,13 +24,13 @@ My code starts here
 
     <form action="/author/save-article/<%= article.id %>" method="POST">
         <label for="articleTitle">Article title:</label><br>
-        <input type="text" name="articleTitle" value="<%= article.title %>"><br>
+        <input type="text" name="articleTitle" value="<%= article.title %>" required><br>
         <label for="articleSubtitle">Article subtitle:</label><br>
-        <input type="text" name="articleSubtitle" value="<%= article.subtitle %>"><br>
+        <input type="text" name="articleSubtitle" value="<%= article.subtitle %>" required><br>
         <label for="articleAuthor">Article author:</label><br>
-        <input type="text" name="articleAuthor" value="<%= article.author %>"><br>
+        <input type="text" name="articleAuthor" value="<%= article.author %>" required><br>
         <label for="articleText">Article Text:</label><br>
-        <textarea  name="articleText"><%= article.textbox %></textarea><br>
+        <textarea  name="articleText" required><%= article.textbox %></textarea><br>
         <input type="submit" value="Save">
     </form>
 

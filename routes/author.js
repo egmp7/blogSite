@@ -14,7 +14,7 @@ const router = express.Router();
  */
 router.get("/", getBlogData, (req, res, next) => {
 
-  global.db.all("SELECT * FROM articles", function (err, articles) {
+  global.db.all("SELECT * FROM articles ORDER BY creation_date DESC", function (err, articles) {
 
     if (err) {
       next(err); 

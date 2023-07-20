@@ -25,11 +25,11 @@ My code starts here
 
     <form action="/reader/save-comment/<%= article.id %>" method="POST">
         <label for="firstName">First name: </label><br>
-        <input type="text" name="firstName" ><br>
+        <input type="text" name="firstName" required><br>
         <label for="lastName">Last name:</label><br>
         <input type="text" name="lastName"c><br>
         <label for="commentText">Comment:</label><br>
-        <textarea  name="commentText"></textarea><br>
+        <textarea  name="commentText" required></textarea><br>
         <input type="submit" value="Comment">
     </form>
 
