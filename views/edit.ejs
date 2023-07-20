@@ -1,42 +1,32 @@
 <!-- ********************
 My code starts here
 ***********************-->
+<%- include('base/header') -%>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= pageTitle %></title>
-</head>
-<body>
-    <h1><%= pageTitle %></h1>
+<h1><%= pageTitle %></h1>
 
-    <a href="/author">Go back</a>
+<!-- Article Info -->
+<p>Creation date: <%= article.creation_date  %></p>
+<p>Last Modification: <%= article.last_modified_date %> </p>
+<% if( article.published ){ %>
+    <p>Published: <%= article.published_date %> </p>
+<% } %>
+<a href="/author">Go back</a>
 
-    <p>Creation date: <%= article.creation_date  %></p>
-    <p>Last Modification: <%= article.last_modified_date %> </p>
-    <% if( article.published ){ %>
-        <p>Published: <%= article.published_date %> </p>
-    <% } %>
-    <p></p>
+<!-- Article Form -->
+<form action="/author/save-article/<%= article.id %>" method="POST">
+    <label for="articleTitle">Article title:</label><br>
+    <input type="text" name="articleTitle" value="<%= article.title %>" required><br>
+    <label for="articleSubtitle">Article subtitle:</label><br>
+    <input type="text" name="articleSubtitle" value="<%= article.subtitle %>" required><br>
+    <label for="articleAuthor">Article author:</label><br>
+    <input type="text" name="articleAuthor" value="<%= article.author %>" required><br>
+    <label for="articleText">Article Text:</label><br>
+    <textarea  name="articleText" required><%= article.textbox %></textarea><br>
+    <input type="submit" value="Save">
+</form>
 
-    <form action="/author/save-article/<%= article.id %>" method="POST">
-        <label for="articleTitle">Article title:</label><br>
-        <input type="text" name="articleTitle" value="<%= article.title %>" required><br>
-        <label for="articleSubtitle">Article subtitle:</label><br>
-        <input type="text" name="articleSubtitle" value="<%= article.subtitle %>" required><br>
-        <label for="articleAuthor">Article author:</label><br>
-        <input type="text" name="articleAuthor" value="<%= article.author %>" required><br>
-        <label for="articleText">Article Text:</label><br>
-        <textarea  name="articleText" required><%= article.textbox %></textarea><br>
-        <input type="submit" value="Save">
-    </form>
-
-</body>
-</html>
-
+<%- include('base/footer') -%>
 <!-- ********************
 My code ends here
 ***********************-->

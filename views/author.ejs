@@ -1,68 +1,61 @@
 <!-- ********************
 My code starts here
 ***********************-->
+<%- include('base/header') -%>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= pageTitle %></title>
-</head>
-<body>
-    <h1><%= blog.title %></h1>
-    <p><%= blog.subtitle %></p>
-    <p><%= blog.author %></p>
-    <h2><%= pageTitle %></h2>
-    <a href="/author/settings">Settings page</a>
-    <br>
-    <a href="/author/create-new-draft">Create new draft</a>
+<h1><%= pageTitle %></h1>
 
-    <!-- Published Articles -->
-    <h2>Published</h2>
-    <ul>
-        <% articles.forEach(function(article) { %>
-            <% if (article.published) { %>
-                <li>
-                    <p><%= article.title %></p>
-                    <p><%= article.subtitle %></p>
-                    <p><%= article.textbox %></p>
-                    <p><%= article.author %></p>
-                    <p><%= article.likes %></p>
-                    <p><%= article.creation_date %></p>
-                    <p><%= article.last_modified_date %></p>
-                    <p><%= article.published_date %></p>
-                    <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
-                    <a href="/author/edit/<%= article.id %>">Edit Article</a><br>
-                    <a href="/reader/<%= article.id %>">Sharing link</a>
-                </li>
-            <% } %>
-         <% }); %> 
-    </ul>
-    
-    <!-- Draft Articles -->
-    <h2>Drafts</h2>
-    <ul>
-        <% articles.forEach(function(article) { %>
-            <% if (! article.published) { %>
-                <li>
-                    <p><%= article.title %></p>
-                    <p><%= article.subtitle %></p>
-                    <p><%= article.textbox %></p>
-                    <p><%= article.author %></p>
-                    <p><%= article.creation_date %></p>
-                    <p><%= article.last_modified_date %></p>
-                    <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
-                    <a href="/author/publish-article/<%= article.id %>">Publish Article</a><br>
-                    <a href="/author/edit/<%= article.id %>">Edit Article</a>
-                </li>
-            <% } %>
-        <% }); %>
-    </ul>
-</body>
-</html>
+<!-- Blog Info -->
+<p><%= blog.title %></p>
+<p><%= blog.subtitle %></p>
+<p><%= blog.author %></p>
 
+<a href="/author/settings">Settings page</a><br>
+<a href="/author/create-new-draft">Create new draft</a>
+
+<!-- Published Articles -->
+<h2>Published</h2>
+<ul>
+    <% articles.forEach(function(article) { %>
+        <% if (article.published) { %>
+            <li>
+                <p><%= article.title %></p>
+                <p><%= article.subtitle %></p>
+                <p><%= article.textbox %></p>
+                <p><%= article.author %></p>
+                <p><%= article.likes %></p>
+                <p><%= article.creation_date %></p>
+                <p><%= article.last_modified_date %></p>
+                <p><%= article.published_date %></p>
+                <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
+                <a href="/author/edit/<%= article.id %>">Edit Article</a><br>
+                <a href="/reader/<%= article.id %>">Sharing link</a>
+            </li>
+        <% } %>
+        <% }); %> 
+</ul>
+
+<!-- Draft Articles -->
+<h2>Drafts</h2>
+<ul>
+    <% articles.forEach(function(article) { %>
+        <% if (! article.published) { %>
+            <li>
+                <p><%= article.title %></p>
+                <p><%= article.subtitle %></p>
+                <p><%= article.textbox %></p>
+                <p><%= article.author %></p>
+                <p><%= article.creation_date %></p>
+                <p><%= article.last_modified_date %></p>
+                <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
+                <a href="/author/publish-article/<%= article.id %>">Publish Article</a><br>
+                <a href="/author/edit/<%= article.id %>">Edit Article</a>
+            </li>
+        <% } %>
+    <% }); %>
+</ul>
+
+<%- include('base/footer') -%>
 <!-- ********************
 My code ends here
 ***********************-->
