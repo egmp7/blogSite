@@ -48,7 +48,7 @@ router.get("/:id", getComments, (req, res, next) => {
 
       if( isPublished ){
         res.render("article.ejs", {
-          pageTitle: "Read article page",
+          pageTitle: "Article page",
           article,
           comments:req.commentsData
         });

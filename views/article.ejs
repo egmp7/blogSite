@@ -3,38 +3,47 @@ My code starts here
 ***********************-->
 <%- include('base/header') -%>
 
-<h1><%= pageTitle %></h1>
+<div class="main-bar">
+    <h1 class="page-title"><%= pageTitle %></h1>
+    <div class="tool"><a  href="/reader"><i class="fa-solid fa-arrow-left fa-lg"></i></a></div>
+</div>
 
 <!-- Article Data -->
-<p><%= article.title %></p>
-<p><%= article.subtitle %></p>
-<p><%= article.textbox %></p>
-<p><%= article.author %></p>
-<p><%= article.likes %></p>
-<p><%= article.published_date %></p>
-<a href="/reader">Go back</a>
-<a href="/reader/like-article/<%= article.id %>">Like</a>
+<div class="article">
+    <p class="article-title"><%= article.title %></p>
+    <p class="article-subtitle"><%= article.subtitle %></p>
+    <p class="article-author">By <%= article.author %></p>
+    <p class="article-dates"><strong>Publication date:</strong> <%= new Date(article.published_date).toLocaleString() %></p>
+
+    <p class="article-text"><%= article.textbox %></p>
+
+    <a class="btn btn-primary" href="/reader/like-article/<%= article.id %>"><%= article.likes %> <i class="fa-solid fa-heart"></i></a>
+</div>
 
 <!-- Comment Form -->
+<h3 class="mt-3">Leave a comment:</h3>
+
 <form action="/reader/save-comment/<%= article.id %>" method="POST">
-    <label for="firstName">First name: </label><br>
-    <input type="text" name="firstName" required><br>
-    <label for="lastName">Last name:</label><br>
-    <input type="text" name="lastName"c><br>
-    <label for="commentText">Comment:</label><br>
-    <textarea  name="commentText" required></textarea><br>
-    <input type="submit" value="Comment">
+    <label class="form-label" for="firstName">First name: </label><br>
+    <input class="form-control" type="text" name="firstName" required><br>
+    <label class="form-label" for="lastName">Last name:</label><br>
+    <input class="form-control" type="text" name="lastName"c><br>
+    <label class="form-label" for="commentText">Comment:</label><br>
+    <textarea class="form-control"  name="commentText" required></textarea><br>
+    <input class="btn btn-success" type="submit" value="Comment">
 </form>
 
 <!-- Comments block -->
-<h2>Comments</h2>
+<% if(comments.length > 0) { %>
+    <h3 class="mt-3"> Comments: </h3>
+<% } %>
+
 <ul>
     <% comments.forEach(function(comment) { %>
-        <li>
-            <p><%= comment.first_name %></p>
-            <p><%= comment.last_name %></p>
-            <p><%= comment.comment %></p>
-            <p><%= comment.creation_date %></p>
+        <li class="comment">
+            <p class="name"><%= comment.first_name %> <%= comment.last_name %></p>
+            <p class="date"><%= new Date(comment.creation_date).toLocaleString() %></p>
+            <p class="text"><%= comment.comment %></p>
         </li>
     <% }) %>
 </ul>

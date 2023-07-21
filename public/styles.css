@@ -11,6 +11,10 @@ body {
   background-color: #f1f1f1;
 }
 
+a {
+  color: none;
+}
+
 .container {
   background-color: white;
   padding-bottom: 10px;
@@ -42,7 +46,8 @@ body {
   background-color: #783eff;
   color: #EDE4FF;
   text-align: center;
-  padding: 20px;
+  padding: 12px 20px;
+  padding-top: 6px;
 }
 .blog .blog-title {
   font-size: 28px;
@@ -81,4 +86,41 @@ body {
 
 .form-label {
   font-weight: bold;
+}
+
+.article {
+  margin-top: 12px;
+  background-color: #f4effe;
+  padding: 10px;
+}
+.article .article-title {
+  font-weight: bold;
+  font-size: 28px;
+}
+.article .article-subtitle {
+  font-style: italic;
+  font-size: 14px;
+}
+.article .article-author {
+  font-size: 16px;
+}
+.article .article-dates {
+  font-size: 14px;
+  margin: 6px 0;
+  margin-bottom: 10px;
+}
+.article .article-text {
+  margin-bottom: 10px;
+}
+
+.comment {
+  background-color: #f4effe;
+  margin-bottom: 16px;
+  padding: 8px;
+}
+.comment .name {
+  font-weight: bold;
+}
+.comment .date {
+  font-size: 12px;
 }/*# sourceMappingURL=styles.css.map */

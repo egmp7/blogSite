@@ -3,26 +3,35 @@ My code starts here
 ***********************-->
 <%- include('base/header') -%>
 
-<h1><%= pageTitle %></h1>
+<div class="main-bar">
+    <h1 class="page-title"><%= pageTitle %></h1>
+</div>
 
 <!-- Blog Info -->
-<p><%= blog.title %></p>
-<p><%= blog.subtitle %></p>
-<p><%= blog.author %></p>
+<div class="blog">
+    <p class="blog-title"><%= blog.title %></p>
+    <p class="blog-author">By <%= blog.author %></p>
+    <p class="blog-subtitle"><%= blog.subtitle %></p>
+</div>
 
 
 <!-- Published Articles -->
-<h2>Published</h2>
+<h2 class="mt-2">Articles</h2>
 <ul>
     <% articles.forEach(function(article) { %>
-        <li>
-            <p><%= article.title %></p>
-            <p><%= article.subtitle %></p>
-            <p><%= article.textbox %></p>
-            <p><%= article.author %></p>
-            <p><%= article.likes %></p>
-            <p><%= article.published_date %></p>
-            <a href="/reader/<%= article.id %>"> Read More</a>
+        <li class="article-item">
+            <p class="article-title"><%= article.title %></p>
+            <p class="article-subtitle"><%= article.subtitle %></p>
+            <p class="article-author">
+                <strong>By:</strong> <%= article.author %> &ensp; 
+                <strong>Likes:</strong><span><%= article.likes %>
+                    <i class="fa-solid fa-heart"></i></span></p>
+            <div class="article-dates">
+                <span class="article-published-date"><strong>Publication date:</strong>
+                    <%= new Date(article.published_date).toLocaleString() %></span>
+            </div>
+
+            <a href="/reader/<%= article.id %>"><button class="btn btn-primary">Read More</button></a>
         </li>
     <% }) %>
 </ul>
