@@ -20,11 +20,11 @@ body{
     padding-bottom: 10px ;
 }
 
-.mainBar{
+.main-bar{
     display: flex;
     align-items: center;
     background-color: $color-1;
-    .pageTitle{
+    .page-title{
         margin: 0;
         
         color: $text-color-1;
@@ -33,7 +33,7 @@ body{
         flex-grow: 1;
     }
     
-    .blog-settings{
+    .tool{
         padding-right: 10px;
         a{
             color: $text-color-1;
@@ -63,24 +63,35 @@ body{
 
 }
 
-.articles{
-    .article-item{
-        padding: 12px 6px;
-        background-color: $color-4;
-        margin-bottom: 20px;
-        .article-title{
-            font-size: 22px;
-            font-weight: bold;
-        }
-        .article-author{
-            font-size: 14px;
-            font-style: italic;
-        }
-        .article-dates{
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-    
+
+.article-item{
+    padding: 12px 6px;
+    background-color: $color-4;
+    margin-bottom: 20px;
+    .article-title{
+        font-size: 22px;
+        font-weight: bold;
     }
-    
+    .article-author{
+        font-size: 14px;
+        font-style: italic;
+    }
+    .article-dates{
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
 }
+
+.article-dates-edit{
+    text-align: center;
+    font-size: 14px;
+    margin: 6px 0;
+}
+.form-label{
+    font-weight: bold;
+}
+    
+
+
+

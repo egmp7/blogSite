@@ -3,22 +3,23 @@ My code starts here
 ***********************-->
 <%- include('base/header') -%>
 
-<h1><%= pageTitle %></h1>
-
-<a href="/author">Go back</a>
+<div class="main-bar">
+    <h1 class="page-title"><%= pageTitle %></h1>
+    <div class="tool"><a  href="/author"><i class="fa-solid fa-arrow-left fa-lg"></i></a></div>
+</div>
 
 <!-- Settings form -->
-<form action="/author/edit-settings" method="POST">
-    <label for="blogTitle">Blog title:</label><br>
-    <input type="text" name="blogTitle" value="<%= blog.title %>"><br>
-    <label for="blogSubtitle">Blog subtitle:</label><br>
-    <input type="text" name="blogSubtitle" value="<%= blog.subtitle %>"><br>
-    <label for="blogAuthor">Blog author:</label><br>
-    <input type="text" name="blogAuthor" value="<%= blog.author %>"><br>
-    <input type="submit" value="Update">
+<form action="/author/edit-settings" method="POST" class="mt-3">
+    <label class="form-label" for="blogTitle">Blog title:</label><br>
+    <input class="form-control" type="text" name="blogTitle" value="<%= blog.title %>"><br>
+    <label class="form-label"for="blogSubtitle">Blog subtitle:</label><br>
+    <textarea class="form-control" type="text" name="blogSubtitle"><%= blog.subtitle %></textarea>
+    <label class="form-label" for="blogAuthor">Blog author:</label><br>
+    <input class="form-control" type="text" name="blogAuthor" value="<%= blog.author %>"><br>
+    <input class="btn btn-success" type="submit" value="Update">
 </form>
 
-<%- include('base/header') -%>
+<%- include('base/footer') -%>
 <!-- ********************
 My code ends here
 ***********************-->

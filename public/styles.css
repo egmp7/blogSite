@@ -16,25 +16,25 @@ body {
   padding-bottom: 10px;
 }
 
-.mainBar {
+.main-bar {
   display: flex;
   align-items: center;
   background-color: #6528F7;
 }
-.mainBar .pageTitle {
+.main-bar .page-title {
   margin: 0;
   color: #EDE4FF;
   font-size: 20px;
   padding: 6px 10px;
   flex-grow: 1;
 }
-.mainBar .blog-settings {
+.main-bar .tool {
   padding-right: 10px;
 }
-.mainBar .blog-settings a {
+.main-bar .tool a {
   color: #EDE4FF;
 }
-.mainBar .blog-settings a:hover {
+.main-bar .tool a:hover {
   color: #D7BBF5;
 }
 
@@ -55,20 +55,30 @@ body {
   font-style: italic;
 }
 
-.articles .article-item {
+.article-item {
   padding: 12px 6px;
   background-color: #EDE4FF;
   margin-bottom: 20px;
 }
-.articles .article-item .article-title {
+.article-item .article-title {
   font-size: 22px;
   font-weight: bold;
 }
-.articles .article-item .article-author {
+.article-item .article-author {
   font-size: 14px;
   font-style: italic;
 }
-.articles .article-item .article-dates {
+.article-item .article-dates {
   font-size: 12px;
   margin-bottom: 6px;
+}
+
+.article-dates-edit {
+  text-align: center;
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.form-label {
+  font-weight: bold;
 }/*# sourceMappingURL=styles.css.map */

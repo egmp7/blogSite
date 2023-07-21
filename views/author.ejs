@@ -3,9 +3,9 @@ My code starts here
 ***********************-->
 <%- include('base/header') -%>
 
-<div class="mainBar">
-    <h1 class="pageTitle"><%= pageTitle %></h1>
-    <div class="blog-settings"><a  href="/author/settings"><i class="fa-solid fa-gear fa-lg"></i></a></div>
+<div class="main-bar">
+    <h1 class="page-title"><%= pageTitle %></h1>
+    <div class="tool"><a  href="/author/settings"><i class="fa-solid fa-gear fa-lg"></i></a></div>
 </div>
 
 <!-- Blog Info -->
@@ -16,7 +16,8 @@ My code starts here
 </div>
 
 <!-- Create draft -->
-<a href="/author/create-new-draft"><button class="btn btn-warning mt-2 mb-2"><strong> Create new draft </strong></button></a>
+<a href="/author/create-new-draft"><button class="btn btn-warning mt-2 mb-2">
+    <strong> Create new draft </strong></button></a>
 
 <!-- Published Articles -->
 <h2>Published Articles</h2>
@@ -26,11 +27,17 @@ My code starts here
             <li class="article-item">
                 <p class="article-title"><%= article.title %></p>
                 <p class="article-subtitle"><%= article.subtitle %></p>
-                <p class="article-author"><strong>By:</strong> <%= article.author %> &ensp; <strong>Likes:</strong> <span><%= article.likes %> <i class="fa-solid fa-heart"></i></span> </p>
+                <p class="article-author">
+                    <strong>By:</strong> <%= article.author %> &ensp; 
+                    <strong>Likes:</strong><span><%= article.likes %>
+                        <i class="fa-solid fa-heart"></i></span></p>
                 <div class="article-dates">
-                    <span class="article-creation-date"></span><strong>Creation date:</strong><%= new Date(article.creation_date).toLocaleString() %></span>,
-                    <span class="article-last-modified-date"></span><strong>Last modified:</strong><%= new Date(article.last_modified_date).toLocaleString() %></span>,
-                    <span class="article-published-date"></span><strong>Publication date:</strong><%= new Date(article.published_date).toLocaleString() %></span>
+                    <span class="article-creation-date"><strong>Creation date:</strong>
+                        <%= new Date(article.creation_date).toLocaleString() %></span>,
+                    <span class="article-last-modified-date"><strong>Last modified:</strong>
+                        <%= new Date(article.last_modified_date).toLocaleString() %></span>,
+                    <span class="article-published-date"><strong>Publication date:</strong>
+                        <%= new Date(article.published_date).toLocaleString() %></span>
                 </div>
                 <p class="article-likes"></p>
                 <a href="/reader/<%= article.id %>"><button class="btn btn-success">Share</button></a>
@@ -53,8 +60,10 @@ My code starts here
                 <p class="article-subtitle"><%= article.subtitle %></p>
                 <p class="article-author"><strong>By:</strong> <%= article.author %></p>
                 <div class="article-dates">
-                    <span class="article-creation-date"></span><strong>Creation date:</strong><%= new Date(article.creation_date).toLocaleString() %></span>,
-                    <span class="article-last-modified-date"></span><strong>Last modified:</strong><%= new Date(article.last_modified_date).toLocaleString() %></span>,
+                    <span class="article-creation-date"></span><strong>Creation date:</strong>
+                    <%= new Date(article.creation_date).toLocaleString() %></span>,
+                    <span class="article-last-modified-date"></span><strong>Last modified:</strong>
+                    <%= new Date(article.last_modified_date).toLocaleString() %></span>,
                 </div>
                 
                 <a href="/author/publish-article/<%= article.id %>"><button class="btn btn-primary">Publish</button></a>
