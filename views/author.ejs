@@ -3,53 +3,63 @@ My code starts here
 ***********************-->
 <%- include('base/header') -%>
 
-<h1><%= pageTitle %></h1>
+<div class="mainBar">
+    <h1 class="pageTitle"><%= pageTitle %></h1>
+    <div class="blog-settings"><a  href="/author/settings"><i class="fa-solid fa-gear fa-lg"></i></a></div>
+</div>
 
 <!-- Blog Info -->
-<p><%= blog.title %></p>
-<p><%= blog.subtitle %></p>
-<p><%= blog.author %></p>
+<div class="blog">
+    <p class="blog-title"><%= blog.title %></p>
+    <p class="blog-author">By <%= blog.author %></p>
+    <p class="blog-subtitle"><%= blog.subtitle %></p>
+</div>
 
-<a href="/author/settings">Settings page</a><br>
-<a href="/author/create-new-draft">Create new draft</a>
+<!-- Create draft -->
+<a href="/author/create-new-draft"><button class="btn btn-warning mt-2 mb-2"><strong> Create new draft </strong></button></a>
 
 <!-- Published Articles -->
-<h2>Published</h2>
-<ul>
+<h2>Published Articles</h2>
+<ul class="articles">
     <% articles.forEach(function(article) { %>
         <% if (article.published) { %>
-            <li>
-                <p><%= article.title %></p>
-                <p><%= article.subtitle %></p>
-                <p><%= article.textbox %></p>
-                <p><%= article.author %></p>
-                <p><%= article.likes %></p>
-                <p><%= article.creation_date %></p>
-                <p><%= article.last_modified_date %></p>
-                <p><%= article.published_date %></p>
-                <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
-                <a href="/author/edit/<%= article.id %>">Edit Article</a><br>
-                <a href="/reader/<%= article.id %>">Sharing link</a>
+            <li class="article-item">
+                <p class="article-title"><%= article.title %></p>
+                <p class="article-subtitle"><%= article.subtitle %></p>
+                <p class="article-author"><strong>By:</strong> <%= article.author %> &ensp; <strong>Likes:</strong> <span><%= article.likes %> <i class="fa-solid fa-heart"></i></span> </p>
+                <div class="article-dates">
+                    <span class="article-creation-date"></span><strong>Creation date:</strong><%= new Date(article.creation_date).toLocaleString() %></span>,
+                    <span class="article-last-modified-date"></span><strong>Last modified:</strong><%= new Date(article.last_modified_date).toLocaleString() %></span>,
+                    <span class="article-published-date"></span><strong>Publication date:</strong><%= new Date(article.published_date).toLocaleString() %></span>
+                </div>
+                <p class="article-likes"></p>
+                <a href="/reader/<%= article.id %>"><button class="btn btn-success">Share</button></a>
+                <a href="/author/edit/<%= article.id %>"><button class="btn btn-warning">Edit</button></a>
+                <a href="/author/delete-article/<%= article.id %>"><button class="btn btn-danger"> Delete</button></a>
+                
             </li>
         <% } %>
         <% }); %> 
 </ul>
 
 <!-- Draft Articles -->
-<h2>Drafts</h2>
-<ul>
+<h2>Draft Articles</h2>
+<ul class="articles">
     <% articles.forEach(function(article) { %>
         <% if (! article.published) { %>
-            <li>
-                <p><%= article.title %></p>
-                <p><%= article.subtitle %></p>
-                <p><%= article.textbox %></p>
-                <p><%= article.author %></p>
-                <p><%= article.creation_date %></p>
-                <p><%= article.last_modified_date %></p>
-                <a href="/author/delete-article/<%= article.id %>">Delete Article</a><br>
-                <a href="/author/publish-article/<%= article.id %>">Publish Article</a><br>
-                <a href="/author/edit/<%= article.id %>">Edit Article</a>
+
+            <li class="article-item">
+                <p class="article-title"><%= article.title %></p>
+                <p class="article-subtitle"><%= article.subtitle %></p>
+                <p class="article-author"><strong>By:</strong> <%= article.author %></p>
+                <div class="article-dates">
+                    <span class="article-creation-date"></span><strong>Creation date:</strong><%= new Date(article.creation_date).toLocaleString() %></span>,
+                    <span class="article-last-modified-date"></span><strong>Last modified:</strong><%= new Date(article.last_modified_date).toLocaleString() %></span>,
+                </div>
+                
+                <a href="/author/publish-article/<%= article.id %>"><button class="btn btn-primary">Publish</button></a>
+                <a href="/author/edit/<%= article.id %>"><button class="btn btn-warning">Edit</button></a>
+                <a href="/author/delete-article/<%= article.id %>"><button class="btn btn-danger"> Delete</button></a>  
             </li>
         <% } %>
     <% }); %>
