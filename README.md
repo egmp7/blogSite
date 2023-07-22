@@ -1,6 +1,11 @@
 ##  Coursework Template ##
 ### CM2040 Database Networks and the Web ###
 
+### Login credentials ###
+
+User="user"
+Password="123"
+
 #### Installation requirements ####
 
 * NodeJS 

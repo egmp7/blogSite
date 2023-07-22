@@ -14,7 +14,7 @@ const router = express.Router();
  */
 router.get("/", checkAuthorization, getBlogData, (req, res, next) => {
 
-  global.db.all("SELECT * FROM articles ORDER BY creation_date DESC", function (err, articles) {
+  global.db.all("SELECT * FROM articles ORDER BY last_modified_date DESC", function (err, articles) {
 
     if (err) {
       next(err); 
@@ -172,7 +172,7 @@ router.get("/login", (req, res, next) => {
  * @def Authentication for user
  */
 router.post("/login", (req, res, next) => {
-  if(req.body.user == 'user' && req.body.password == '123') {
+  if(req.body.user == process.env.AUTHOR_USER && req.body.password == process.env.AUTHOR_PASSWORD) {
     req.session.user = 'active';
     res.redirect("/author")
   }

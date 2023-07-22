@@ -27,6 +27,9 @@ app.use('/user', userRoutes);
  My code starts here 
 *********************/
 
+// dotenv
+require("dotenv").config();
+
 // Express Sesions
 var session = require('express-session');
 app.use(session({secret: "The secret key"}));
