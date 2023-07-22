@@ -1,0 +1,22 @@
+<!-- ********************
+My code starts here
+***********************-->
+<%- include('base/header') -%>
+
+<div class="main-bar">
+    <h1 class="page-title"><%= pageTitle %></h1>
+    <div class="tool"><a  href="/reader/"><i class="fa-solid fa-arrow-left fa-lg"></i></a></div>
+</div>
+
+<form action="/author/login" method="POST">
+    <label for="user" class="form-label">User:</label>
+    <input type="text" name="user" class="form-control">
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" name="password" class="form-control">
+    <input type="submit" class="btn btn-primary mt-3" value="Submit">
+</form>
+
+<%- include('base/footer') -%>
+<!-- ********************
+My code ends here
+***********************-->

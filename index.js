@@ -27,6 +27,10 @@ app.use('/user', userRoutes);
  My code starts here 
 *********************/
 
+// Express Sesions
+var session = require('express-session');
+app.use(session({secret: "The secret key"}));
+
 // Static files
 app.use(express.static('public'))
 
