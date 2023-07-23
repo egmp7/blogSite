@@ -63,7 +63,7 @@ My code starts here
                     <span class="article-creation-date"></span><strong>Creation date:</strong>
                     <%= new Date(article.creation_date).toLocaleString() %></span>,
                     <span class="article-last-modified-date"></span><strong>Last modified:</strong>
-                    <%= new Date(article.last_modified_date).toLocaleString() %></span>,
+                    <%= new Date(article.last_modified_date).toLocaleString() %></span>
                 </div>
                 
                 <a href="/author/publish-article/<%= article.id %>"><button class="btn btn-primary">Publish</button></a>
